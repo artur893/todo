@@ -12,10 +12,10 @@ class Todo {
     }
 }
 
-function addToList(title, description, dueDate, priority, notes, project, complete){
+function addToList(title, description, dueDate, priority, notes, project, complete) {
     const todo = new Todo(title, description, dueDate, priority, notes, project, complete)
     todos.push(todo)
 }
 
 
-export {addToList, todos}
+export { addToList, todos }

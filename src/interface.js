@@ -1,9 +1,20 @@
-const title = document.querySelector(".title")
+import { todos } from "./todos.js"
+
 const main = document.querySelector(".main")
 
 
+function findDomElements() {
+    const taskCard = document.querySelectorAll(".taskcard")
+    const leftDiv = document.querySelectorAll(".left")
+    const dateDiv = document.querySelectorAll(".date")
+    const titleDiv = document.querySelectorAll(".title")
+    const checkbox = document.querySelectorAll(".completed")
+    return { taskCard, leftDiv, dateDiv, titleDiv, checkbox }
+}
 
-function createTaskCard() {
+
+
+function createSingleCard() {
     const taskCard = document.createElement("div")
     const leftDiv = document.createElement("div")
     const dateDiv = document.createElement("div")
@@ -22,9 +33,28 @@ function createTaskCard() {
     taskCard.appendChild(leftDiv)
     taskCard.appendChild(dateDiv)
     leftDiv.appendChild(checkbox)
-    leftDiv.appendChild(titleDiv)   
+    leftDiv.appendChild(titleDiv)
+}
+
+function createTaskCards() {
+    for (let i = 0; i < todos.length; i++) {
+        createSingleCard()
+    }
+}
+
+function render() {
+    createTaskCards()
+    const dom = findDomElements()
+    console.log(dom)
+
+    for (let i = 0; i < todos.length; i++) {
+        dom.titleDiv[i].textContent = todos[i].title
+    }
 }
 
 
 
-export { title, main, createTaskCard }
+
+
+
+export { render }
