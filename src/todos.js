@@ -17,5 +17,10 @@ function addToList(title, description, dueDate, priority, notes, project, comple
     todos.push(todo)
 }
 
+function pushOutTask(index){
+    todos.splice(index, 1)
+}
 
-export { addToList, todos }
+
+
+export { addToList, todos, pushOutTask}

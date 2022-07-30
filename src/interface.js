@@ -1,8 +1,8 @@
-import { todos } from "./todos.js"
+import { pushOutTask, todos } from "./todos.js"
 import { format } from 'date-fns'
 
 const result = format(new Date(2022, 3, 13), 'dd/MM/yyyy')
-console.log(result)
+
 
 const main = document.querySelector(".main")
 
@@ -62,13 +62,28 @@ function createTaskCards() {
 function render() {
     createTaskCards()
     const dom = findDomElements()
-    console.log(dom)
-
     for (let i = 0; i < todos.length; i++) {
+        dom.binImg[i].dataset.index = i
+        dom.moreImg[i].dataset.index = i
         dom.taskCard[i].dataset.index = i
         dom.titleDiv[i].textContent = todos[i].title
         dom.dateDiv[i].textContent = todos[i].dueDate
+    } 
+}
 
+function removeFromList() {
+    let dom = findDomElements()
+    for (let i = 0; i < todos.length; i++) {
+        dom.binImg[i].addEventListener("click", function (e) {
+            let index = e.target.dataset.index
+            pushOutTask(index)
+            console.log(index)
+            console.log(todos)
+            dom.taskCard.forEach((taskCard) => {
+                taskCard.remove()
+            })
+            render()
+        })
     }
 }
 
@@ -76,5 +91,4 @@ function render() {
 
 
 
-
-export { render }
+export { render, removeFromList }
