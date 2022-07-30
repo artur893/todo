@@ -6,8 +6,10 @@ const result = format(new Date(2022, 3, 13), 'dd/MM/yyyy')
 
 const main = document.querySelector(".main")
 
+//DOM FINDING
 
 function findDomElements() {
+    const addBtn = document.querySelector(".add")
     const taskCard = document.querySelectorAll(".taskcard")
     const leftDiv = document.querySelectorAll(".left")
     const dateDiv = document.querySelectorAll(".date")
@@ -15,8 +17,10 @@ function findDomElements() {
     const checkbox = document.querySelectorAll(".completed")
     const moreImg = document.querySelectorAll(".moreImg")
     const binImg = document.querySelectorAll(".binImg")
-    return { taskCard, leftDiv, dateDiv, titleDiv, checkbox, moreImg, binImg }
+    return { addBtn, taskCard, leftDiv, dateDiv, titleDiv, checkbox, moreImg, binImg }
 }
+
+//DOM CREATING
 
 function createSingleCard() {
     const taskCard = document.createElement("div")
@@ -74,11 +78,19 @@ function addData() {
     }
 }
 
+//DOM MANIPULATE
+
 function render() {
     createTaskCards()
     addData()
     setIndex()
+    addFunctionalities()
+    addButton()
+}
+
+function addFunctionalities() {
     removeFromList()
+    openMoreInfo()
 }
 
 function removeFromList() {
@@ -89,8 +101,6 @@ function removeFromList() {
             pushOutTask(index)
             deleteTaskDivs()
             render()
-            console.log(index)
-            console.log(todos)
         })
     }
 }
@@ -100,6 +110,31 @@ function deleteTaskDivs() {
     dom.taskCard.forEach((taskCard) => {
         taskCard.remove()
     })
+}
+
+function openMoreInfo() {
+    const dom = findDomElements()
+    for (let i = 0; i < todos.length; i++) {
+        dom.moreImg[i].addEventListener("click", function (e) {
+            let index = e.target.dataset.index
+            dom.taskCard[index].classList.toggle("active")
+            console.log(index)
+        })
+    }
+}
+
+function addButton(){
+    const dom = findDomElements()
+    dom.addBtn.addEventListener("click", function(){
+        const taskCard = document.createElement("div")
+        taskCard.classList.add("taskcard")
+        main.insertBefore(taskCard, dom.taskCard[0])
+
+
+
+
+    })
+
 }
 
 

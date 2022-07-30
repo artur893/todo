@@ -42,6 +42,40 @@ header {
     background-color: var(--col4);
 }
 
+.newcard {
+    background-color: var(--col3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 40px 220px;
+    padding: 5px;
+}
+
+textarea {
+    margin: 5px;
+    font-family: sans-serif;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.form {
+    width: 100%;
+    margin: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .taskcard {
     background-color: var(--col3);
     display: flex;
@@ -51,10 +85,61 @@ header {
     padding: 5px;
 }
 
+.taskcard.active {
+    height: 200px;
+    align-items: flex-start;
+}
+
 input {
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 10px;
     height: 16px;
     width: 16px;
+}
+
+#dateArea {
+    width: 110px;
+}
+
+#high:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: red;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+#medium:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: orange;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+#low:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: rgb(0, 160, 0);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
 }
 
 .left {

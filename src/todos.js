@@ -3,12 +3,13 @@ const todos = []
 class Todo {
     constructor(title, description, dueDate, priority, notes, project, complete) {
         this.title = title
-        this.description = description
         this.dueDate = dueDate
+        this.complete = complete
+
+        this.description = description
         this.priority = priority
         this.notes = notes
         this.project = project
-        this.complete = complete
     }
 }
 
