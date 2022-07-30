@@ -18,8 +18,6 @@ function findDomElements() {
     return { taskCard, leftDiv, dateDiv, titleDiv, checkbox, moreImg, binImg }
 }
 
-
-
 function createSingleCard() {
     const taskCard = document.createElement("div")
     const leftDiv = document.createElement("div")
@@ -59,32 +57,49 @@ function createTaskCards() {
     }
 }
 
-function render() {
-    createTaskCards()
+function setIndex() {
     const dom = findDomElements()
     for (let i = 0; i < todos.length; i++) {
         dom.binImg[i].dataset.index = i
         dom.moreImg[i].dataset.index = i
         dom.taskCard[i].dataset.index = i
+    }
+}
+
+function addData() {
+    const dom = findDomElements()
+    for (let i = 0; i < todos.length; i++) {
         dom.titleDiv[i].textContent = todos[i].title
         dom.dateDiv[i].textContent = todos[i].dueDate
-    } 
+    }
+}
+
+function render() {
+    createTaskCards()
+    addData()
+    setIndex()
+    removeFromList()
 }
 
 function removeFromList() {
-    let dom = findDomElements()
+    const dom = findDomElements()
     for (let i = 0; i < todos.length; i++) {
         dom.binImg[i].addEventListener("click", function (e) {
             let index = e.target.dataset.index
             pushOutTask(index)
+            deleteTaskDivs()
+            render()
             console.log(index)
             console.log(todos)
-            dom.taskCard.forEach((taskCard) => {
-                taskCard.remove()
-            })
-            render()
         })
     }
+}
+
+function deleteTaskDivs() {
+    const dom = findDomElements()
+    dom.taskCard.forEach((taskCard) => {
+        taskCard.remove()
+    })
 }
 
 

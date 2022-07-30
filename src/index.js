@@ -12,9 +12,12 @@ addToList("Zupa", "Zamrozić", "13/08/2022", "Ważne", "notatka", "ważny projek
 addToList("Program", "Napisać", "21/09/2022", "Trochę ważne", "notatka", "dev project", true)
 
 
+function runApp() {
+    render()
+}
 
-render()
-removeFromList()
+runApp()
+
 
 
 console.log(todos)
