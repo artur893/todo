@@ -1,4 +1,4 @@
-import { pushOutTask, todos } from "./todos.js"
+import { addToList, pushOutTask, todos } from "./todos.js"
 import { format } from 'date-fns'
 
 const result = format(new Date(2022, 3, 13), 'dd/MM/yyyy')
@@ -17,7 +17,23 @@ function findDomElements() {
     const checkbox = document.querySelectorAll(".completed")
     const moreImg = document.querySelectorAll(".moreImg")
     const binImg = document.querySelectorAll(".binImg")
-    return { addBtn, taskCard, leftDiv, dateDiv, titleDiv, checkbox, moreImg, binImg }
+    const newCard = document.querySelector(".newcard")
+    return { addBtn, taskCard, leftDiv, dateDiv, titleDiv, checkbox, moreImg, binImg, newCard }
+}
+
+function findDomInputs() {
+    const title = document.querySelector("#titleArea")
+    const describtion = document.querySelector("#describtionArea")
+    const notes = document.querySelector("#notesArea")
+    const project = document.querySelector("#projectArea")
+    const date = document.querySelector("#dateArea")
+    const priorHigh = document.querySelector("#high")
+    const priorMed = document.querySelector("#medium")
+    const priorLow = document.querySelector("#low")
+    const completed = document.querySelector("#completed")
+    const closeBtn = document.querySelector("#close")
+    const doneBtn = document.querySelector("#done")
+    return { title, describtion, notes, project, date, priorHigh, priorMed, priorLow, completed, closeBtn, doneBtn }
 }
 
 //DOM CREATING
@@ -85,7 +101,6 @@ function render() {
     addData()
     setIndex()
     addFunctionalities()
-    addButton()
 }
 
 function addFunctionalities() {
@@ -123,22 +138,54 @@ function openMoreInfo() {
     }
 }
 
-function addButton(){
+function addButton() {
     const dom = findDomElements()
-    dom.addBtn.addEventListener("click", function(){
-        const taskCard = document.createElement("div")
-        taskCard.classList.add("taskcard")
-        main.insertBefore(taskCard, dom.taskCard[0])
-
-
-
-
+    dom.addBtn.addEventListener("click", function () {
+        dom.newCard.classList.toggle("open")
+        getInputValues()
     })
+}
 
+function closeButton() {
+    const dom = findDomInputs()
+    const div = findDomElements()
+    dom.closeBtn.addEventListener("click", function() {
+        div.newCard.classList.remove("open")
+    })
+}
+
+function newCardBtnFunctions() {
+    addButton()
+    closeButton()
+    addTask()
+}
+
+function getInputValues() {
+    const dom = findDomInputs()
+    const title = dom.title.value
+    const describtion = dom.describtion.value
+    const notes = dom.notes.value
+    const project = dom.project.value
+    const date = dom.date.value
+    const priorHigh = dom.priorHigh.checked
+    const priorMed = dom.priorMed.checked
+    const priorLow = dom.priorLow.checked
+    const completed = dom.completed.checked
+    return { title, describtion, notes, project, date, priorHigh, priorMed, priorLow, completed }
+}
+
+function addTask() {
+    const dom = findDomInputs()
+    dom.doneBtn.addEventListener("click", function () {
+        const values = getInputValues()
+        addToList(values.title, values.describtion, values.date, "PRIORYTET", values.notes, values.project, values.completed)
+        deleteTaskDivs()
+        render()
+    })
 }
 
 
 
 
 
-export { render, removeFromList }
+export { render, removeFromList, findDomInputs, newCardBtnFunctions }

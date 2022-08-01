@@ -1,3 +1,5 @@
+import { findDomInputs } from './interface.js'
+
 const todos = []
 
 class Todo {
@@ -18,10 +20,12 @@ function addToList(title, description, dueDate, priority, notes, project, comple
     todos.push(todo)
 }
 
-function pushOutTask(index){
+function pushOutTask(index) {
     todos.splice(index, 1)
 }
 
 
 
-export { addToList, todos, pushOutTask}
+
+
+export { addToList, todos, pushOutTask }

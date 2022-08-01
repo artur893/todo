@@ -1,4 +1,4 @@
-import { render, removeFromList } from './interface.js';
+import { render, newCardBtnFunctions } from './interface.js';
 import { addToList, todos } from './todos.js';
 
 
@@ -13,6 +13,7 @@ addToList("Program", "Napisać", "21/09/2022", "Trochę ważne", "notatka", "dev
 
 
 function runApp() {
+    newCardBtnFunctions()
     render()
 }
 
