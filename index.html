@@ -22,8 +22,15 @@
                 Add new task
             </div>
             <div class="newcard">
-                <textarea name="title" id="titleArea" cols="30" rows="1" placeholder="Title"></textarea>
-                <textarea name="describtion" id="describtionArea" cols="30" rows="1" placeholder="Describtion"></textarea>
+                <div class="up">
+                    <textarea name="title" id="titleArea" cols="30" rows="1" placeholder="Title"></textarea>
+                    <div class="buttons">
+                        <img src="./images/done.svg" alt="done icon" id="done">
+                        <img src="./images/close.svg" alt="close icon" id="close">
+                    </div>
+                </div>
+                <textarea name="describtion" id="describtionArea" cols="30" rows="1"
+                    placeholder="Describtion"></textarea>
                 <textarea name="notes" id="notesArea" cols="30" rows="1" placeholder="Notes"></textarea>
                 <textarea name="project" id="projectArea" cols="30" rows="1" placeholder="Project"></textarea>
                 <div class="form">
@@ -39,7 +46,7 @@
                     </form>
                     <form action="" class="completed">
                         <label for="completed">Completed:</label>
-                        <input type="checkbox" name="completed" id="">
+                        <input type="checkbox" name="completed" id="completed">
                     </form>
                 </div>
             </div>
