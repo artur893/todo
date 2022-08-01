@@ -43,6 +43,7 @@ header {
 }
 
 .add {
+    border-radius: 10px;
     background-color: var(--col3);
     display: flex;
     align-items: center;
@@ -61,6 +62,7 @@ header {
 }
 
 .newcard {
+    border-radius: 10px;
     background-color: var(--col3);
     display: flex;
     flex-direction: column;
@@ -120,7 +122,9 @@ form {
 
 .taskcard {
     background-color: var(--col3);
+    border-radius: 10px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin: 40px 220px;
@@ -130,6 +134,10 @@ form {
 .taskcard.active {
     height: 200px;
     align-items: flex-start;
+}
+
+.right>form {
+    margin: 0 40px 0 0;
 }
 
 input {
