@@ -21,7 +21,10 @@ function findDomElements() {
     const priorHigh = document.querySelectorAll("#high")
     const priorMed = document.querySelectorAll("#medium")
     const priorLow = document.querySelectorAll("#low")
-    return { addBtn, taskCard, leftDiv, dateDiv, titleDiv, checkbox, moreImg, binImg, newCard, priorHigh, priorMed, priorLow }
+    const descriptionDiv = document.querySelectorAll(".description")
+    const notesDiv = document.querySelectorAll(".notes")
+    const projectDiv = document.querySelectorAll(".project")
+    return { addBtn, taskCard, leftDiv, dateDiv, titleDiv, checkbox, moreImg, binImg, newCard, priorHigh, priorMed, priorLow, descriptionDiv, notesDiv, projectDiv }
 }
 
 function findDomInputs() {
@@ -55,6 +58,10 @@ function createSingleCard() {
     const priorHigh = document.createElement("input")
     const priorMed = document.createElement("input")
     const priorLow = document.createElement("input")
+    const descriptionDiv = document.createElement("div")
+    const notesDiv = document.createElement("div")
+    const projectDiv = document.createElement("div")
+    const upDiv = document.createElement("div")
 
     taskCard.classList.add("taskcard")
     leftDiv.classList.add("left")
@@ -63,6 +70,10 @@ function createSingleCard() {
     titleDiv.classList.add("title")
     priority.classList.add("priority")
     checkbox.classList.add("completed")
+    descriptionDiv.classList.add("description")
+    notesDiv.classList.add("notes")
+    projectDiv.classList.add("project")
+    upDiv.classList.add("updiv")
     checkbox.setAttribute("name", "completed")
     checkbox.setAttribute("type", "checkbox")
     imgMore.setAttribute("src", "./images/more.svg")
@@ -82,8 +93,9 @@ function createSingleCard() {
 
 
     main.appendChild(taskCard)
-    taskCard.appendChild(leftDiv)
-    taskCard.appendChild(rightDiv)
+    taskCard.appendChild(upDiv)
+    upDiv.appendChild(leftDiv)
+    upDiv.appendChild(rightDiv)
     rightDiv.appendChild(priority)
     rightDiv.appendChild(dateDiv)
     rightDiv.appendChild(imgMore)
@@ -94,6 +106,9 @@ function createSingleCard() {
     priority.appendChild(priorHigh)
     priority.appendChild(priorMed)
     priority.appendChild(priorLow)
+    taskCard.appendChild(descriptionDiv)
+    taskCard.appendChild(notesDiv)
+    taskCard.appendChild(projectDiv)
 }
 
 function createTaskCards() {
@@ -115,9 +130,13 @@ function addData() {
     addDataPriority()
     addDataCompleted()
     const dom = findDomElements()
+    console.log(dom)
     for (let i = 0; i < todos.length; i++) {
         dom.titleDiv[i].textContent = todos[i].title
         dom.dateDiv[i].textContent = todos[i].dueDate
+        dom.descriptionDiv[i].textContent = todos[i].description
+        dom.notesDiv[i].textContent = todos[i].notes
+        dom.projectDiv[i].textContent = todos[i].project
     }
 }
 
@@ -135,7 +154,6 @@ function addDataCompleted() {
 
 function addDataPriority() {
     const dom = findDomElements()
-    console.log(dom)
     for (let i = 0; i < todos.length; i++) {
         if (todos[i].priority === "high") {
             dom.priorHigh[i + 1].checked = true
@@ -156,6 +174,7 @@ function render() {
     addData()
     setIndex()
     addFunctionalities()
+    console.log(todos)
 }
 
 function addFunctionalities() {
@@ -187,8 +206,9 @@ function openMoreInfo() {
     for (let i = 0; i < todos.length; i++) {
         dom.moreImg[i].addEventListener("click", function (e) {
             let index = e.target.dataset.index
-            dom.taskCard[index].classList.toggle("active")
-            console.log(index)
+            dom.descriptionDiv[index].classList.toggle("active")
+            dom.notesDiv[index].classList.toggle("active")
+            dom.projectDiv[index].classList.toggle("active")
         })
     }
 }
@@ -231,12 +251,13 @@ function getInputValues() {
 
 function addTask() {
     const dom = findDomInputs()
+    const wholeDom = findDomElements()
     dom.doneBtn.addEventListener("click", function () {
         const values = getInputValues()
         addToList(values.title, values.describtion, values.date, checkPriority(), values.notes, values.project, values.completed)
         deleteTaskDivs()
         render()
-        console.log(todos)
+        wholeDom.newCard.classList.remove("open")
     })
 }
 

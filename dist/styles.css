@@ -123,17 +123,34 @@ form {
 .taskcard {
     background-color: var(--col3);
     border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
     margin: 40px 220px;
     padding: 5px;
 }
 
-.taskcard.active {
-    height: 200px;
-    align-items: flex-start;
+.updiv {
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.description,
+.notes,
+.project {
+    height: 0;
+    font-size: 0;
+    
+}
+
+.description.active,
+.notes.active,
+.project.active {
+    height: auto;
+    font-size: 1rem;
+    margin: 10px 0px 0px 36px
+
 }
 
 .right>form {

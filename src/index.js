@@ -21,8 +21,6 @@ runApp()
 
 
 
-console.log(todos)
-
 
 
 
