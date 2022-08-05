@@ -1,4 +1,4 @@
-import { selectTodayTasks, filteredTodos } from './todos.js'
+import { selectTodayTasks, selectThisWeekTasks, filteredTodos } from './todos.js'
 import { render, renderFiltered, deleteTaskDivs } from './interface.js'
 
 function findMenuElements() {
@@ -25,9 +25,18 @@ function todayTasks() {
         renderFiltered()
     })
 }
+
+function thisWeekTasks() {
+    menuDom.thisWeek.addEventListener("click", function () {
+        selectThisWeekTasks()
+        deleteTaskDivs()
+        renderFiltered()
+    })
+}
 function menuFunctions() {
     allTasks()
     todayTasks()
+    thisWeekTasks()
 }
 
 export { menuFunctions }

@@ -1,4 +1,5 @@
 import { findDomInputs } from './interface.js'
+import { getWeek } from 'date-fns'
 
 const todos = []
 let filteredTodos = []
@@ -34,7 +35,7 @@ function selectTodayTasks() {
     for (let i = 0; i < todos.length; i++) {
         const today = new Date()
         const date = todos[i].dueDate
-        if (today.getDay() === date.getDay() &&
+        if (today.getDate() === date.getDate() &&
             today.getMonth() === date.getMonth() &&
             today.getFullYear() === date.getFullYear()) {
             filteredTodos.push(todos[i])
@@ -44,7 +45,16 @@ function selectTodayTasks() {
     }
 }
 
+function selectThisWeekTasks() {
+    clearFilteredTodos()
+    for (let i = 0; i < todos.length; i++) {
+        const today = new Date()
+        const date = todos[i].dueDate
+        if (getWeek(today) === getWeek(date)) {
+            filteredTodos.push(todos[i])
+        }
+    }
+}
 
 
-
-export { addToList, todos, filteredTodos, pushOutTask, selectTodayTasks }
+export { addToList, todos, filteredTodos, pushOutTask, selectTodayTasks, selectThisWeekTasks }
