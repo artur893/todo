@@ -1,7 +1,9 @@
 import { addToList, pushOutTask, todos } from "./todos.js"
 import { format } from 'date-fns'
+import { daysToWeeks } from "date-fns/esm"
 
 const result = format(new Date(2022, 3, 13), 'dd/MM/yyyy')
+console.log(result)
 
 
 const main = document.querySelector(".main")
@@ -129,14 +131,26 @@ function setIndex() {
 function addData() {
     addDataPriority()
     addDataCompleted()
+    addDataDate()
+    addDataText()
+}
+
+function addDataText() {
     const dom = findDomElements()
-    console.log(dom)
     for (let i = 0; i < todos.length; i++) {
         dom.titleDiv[i].textContent = todos[i].title
-        dom.dateDiv[i].textContent = todos[i].dueDate
         dom.descriptionDiv[i].textContent = todos[i].description
         dom.notesDiv[i].textContent = todos[i].notes
         dom.projectDiv[i].textContent = todos[i].project
+    }
+}
+
+function addDataDate() {
+    const dom = findDomElements()
+    for (let i = 0; i < todos.length; i++) {
+        const date = todos[i].dueDate
+        const formatDate = format(date, 'dd.MM.yyyy')
+        dom.dateDiv[i].textContent = formatDate
     }
 }
 
@@ -254,7 +268,7 @@ function addTask() {
     const wholeDom = findDomElements()
     dom.doneBtn.addEventListener("click", function () {
         const values = getInputValues()
-        addToList(values.title, values.describtion, values.date, checkPriority(), values.notes, values.project, values.completed)
+        addToList(values.title, values.describtion, new Date(values.date), checkPriority(), values.notes, values.project, values.completed)
         deleteTaskDivs()
         render()
         wholeDom.newCard.classList.remove("open")

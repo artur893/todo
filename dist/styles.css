@@ -30,12 +30,6 @@ header {
     display: flex;
 }
 
-.sidebar {
-    min-width: 15vw;
-    min-height: 95vh;
-    background-color: var(--col2);
-}
-
 .main {
     min-width: 85vw;
     min-height: 95vh;
@@ -51,9 +45,6 @@ header {
     padding: 5px;
     cursor: pointer;
 }
-
-
-
 .add>img {
     width: 20px;
     width: 20px;
@@ -140,17 +131,15 @@ form {
 .notes,
 .project {
     height: 0;
-    font-size: 0;
-    
+    font-size: 0;  
 }
 
 .description.active,
 .notes.active,
 .project.active {
     height: auto;
-    font-size: 1rem;
-    margin: 10px 0px 0px 36px
-
+    font-size: 0.9rem;
+    margin: 10px 0px 0px 36px;
 }
 
 .right>form {
@@ -223,4 +212,29 @@ input {
     width: 20px;
     margin: 0 0 0 10px;
     cursor: pointer;
+}
+
+/*SIDEBAR*/
+.sidebar {
+    min-width: 15vw;
+    min-height: 95vh;
+    background-color: var(--col2);
+}
+
+nav {
+    font-weight: 700;
+    color: var(--col4);
+}
+
+ul {
+    margin: clamp(10px, 5vw, 100px);
+}
+
+li {
+    margin: 25px 0;
+    cursor: pointer;
+}
+
+li:hover {
+    color: white;
 }

@@ -4,12 +4,13 @@ import { addToList, todos } from './todos.js';
 
 
 
-addToList("Zupa", "Zamrozić", "13/08/2022", "high", "notatka", "ważny projekt", false)
-addToList("Program", "Napisać", "21/09/2022", "med", "notatka", "dev project", true)
-addToList("Zupa", "Zamrozić", "13/08/2022", "low", "notatka", "ważny projekt", false)
-addToList("Zupa", "Zamrozić", "13/08/2022", "high", "notatka", "ważny projekt", false)
-addToList("Program", "Napisać", "21/09/2022", "med", "notatka", "dev project", true)
-addToList("Zupa", "Zamrozić", "13/08/2022", "low", "notatka", "ważny projekt", false)
+addToList("Zupa", "Zamrozić", new Date("2022-08-13"), "high", "notatka", "ważny projekt", false)
+addToList("Program", "Napisać", new Date("2022-09-21"), "med", "notatka", "dev project", true)
+addToList("Zupa", "Zamrozić", new Date("2022-08-13"), "high", "notatka", "ważny projekt", false)
+addToList("Program", "Napisać", new Date("2022-09-21"), "med", "notatka", "dev project", true)
+addToList("Zupa", "Zamrozić", new Date("2022-08-13"), "high", "notatka", "ważny projekt", false)
+addToList("Program", "Napisać", new Date("2022-09-21"), "med", "notatka", "dev project", true)
+
 
 
 function runApp() {
