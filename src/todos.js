@@ -1,6 +1,7 @@
 import { findDomInputs } from './interface.js'
 
 const todos = []
+let filteredTodos = []
 
 class Todo {
     constructor(title, description, dueDate, priority, notes, project, complete) {
@@ -24,8 +25,26 @@ function pushOutTask(index) {
     todos.splice(index, 1)
 }
 
+function clearFilteredTodos() {
+    filteredTodos = []
+}
+
+function selectTodayTasks() {
+    clearFilteredTodos()
+    for (let i = 0; i < todos.length; i++) {
+        const today = new Date()
+        const date = todos[i].dueDate
+        if (today.getDay() === date.getDay() &&
+            today.getMonth() === date.getMonth() &&
+            today.getFullYear() === date.getFullYear()) {
+            filteredTodos.push(todos[i])
+        }
+        console.log(todos)
+        console.log(filteredTodos)
+    }
+}
 
 
 
 
-export { addToList, todos, pushOutTask }
+export { addToList, todos, filteredTodos, pushOutTask, selectTodayTasks }

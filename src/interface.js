@@ -1,4 +1,4 @@
-import { addToList, pushOutTask, todos } from "./todos.js"
+import { addToList, pushOutTask, todos, filteredTodos } from "./todos.js"
 import { format } from 'date-fns'
 import { daysToWeeks } from "date-fns/esm"
 
@@ -113,51 +113,51 @@ function createSingleCard() {
     taskCard.appendChild(projectDiv)
 }
 
-function createTaskCards() {
-    for (let i = 0; i < todos.length; i++) {
+function createTaskCards(source) {
+    for (let i = 0; i < source.length; i++) {
         createSingleCard()
     }
 }
 
-function setIndex() {
+function setIndex(source) {
     const dom = findDomElements()
-    for (let i = 0; i < todos.length; i++) {
+    for (let i = 0; i < source.length; i++) {
         dom.binImg[i].dataset.index = i
         dom.moreImg[i].dataset.index = i
         dom.taskCard[i].dataset.index = i
     }
 }
 
-function addData() {
-    addDataPriority()
-    addDataCompleted()
-    addDataDate()
-    addDataText()
+function addData(source) {
+    addDataPriority(source)
+    addDataCompleted(source)
+    addDataDate(source)
+    addDataText(source)
 }
 
-function addDataText() {
+function addDataText(source) {
     const dom = findDomElements()
-    for (let i = 0; i < todos.length; i++) {
-        dom.titleDiv[i].textContent = todos[i].title
-        dom.descriptionDiv[i].textContent = todos[i].description
-        dom.notesDiv[i].textContent = todos[i].notes
-        dom.projectDiv[i].textContent = todos[i].project
+    for (let i = 0; i < source.length; i++) {
+        dom.titleDiv[i].textContent = source[i].title
+        dom.descriptionDiv[i].textContent = source[i].description
+        dom.notesDiv[i].textContent = source[i].notes
+        dom.projectDiv[i].textContent = source[i].project
     }
 }
 
-function addDataDate() {
+function addDataDate(source) {
     const dom = findDomElements()
-    for (let i = 0; i < todos.length; i++) {
-        const date = todos[i].dueDate
+    for (let i = 0; i < source.length; i++) {
+        const date = source[i].dueDate
         const formatDate = format(date, 'dd.MM.yyyy')
         dom.dateDiv[i].textContent = formatDate
     }
 }
 
-function addDataCompleted() {
+function addDataCompleted(source) {
     const dom = findDomElements()
-    for (let i = 0; i < todos.length; i++) {
-        if (todos[i].complete === true) {
+    for (let i = 0; i < source.length; i++) {
+        if (source[i].complete === true) {
             dom.checkbox[i + 1].checked = true
         }
         else {
@@ -166,16 +166,16 @@ function addDataCompleted() {
     }
 }
 
-function addDataPriority() {
+function addDataPriority(source) {
     const dom = findDomElements()
-    for (let i = 0; i < todos.length; i++) {
-        if (todos[i].priority === "high") {
+    for (let i = 0; i < source.length; i++) {
+        if (source[i].priority === "high") {
             dom.priorHigh[i + 1].checked = true
         }
-        if (todos[i].priority === "med") {
+        if (source[i].priority === "med") {
             dom.priorMed[i + 1].checked = true
         }
-        if (todos[i].priority === "low") {
+        if (source[i].priority === "low") {
             dom.priorLow[i + 1].checked = true
         }
     }
@@ -184,21 +184,28 @@ function addDataPriority() {
 //DOM MANIPULATE
 
 function render() {
-    createTaskCards()
-    addData()
-    setIndex()
-    addFunctionalities()
+    createTaskCards(todos)
+    addData(todos)
+    setIndex(todos)
+    addFunctionalities(todos)
     console.log(todos)
 }
 
-function addFunctionalities() {
-    removeFromList()
-    openMoreInfo()
+function renderFiltered() {
+    createTaskCards(filteredTodos)
+    addData(filteredTodos)
+    setIndex(filteredTodos)
+    addFunctionalities(filteredTodos)
 }
 
-function removeFromList() {
+function addFunctionalities(source) {
+    removeFromList(source)
+    openMoreInfo(source)
+}
+
+function removeFromList(source) {
     const dom = findDomElements()
-    for (let i = 0; i < todos.length; i++) {
+    for (let i = 0; i < source.length; i++) {
         dom.binImg[i].addEventListener("click", function (e) {
             let index = e.target.dataset.index
             pushOutTask(index)
@@ -215,9 +222,9 @@ function deleteTaskDivs() {
     })
 }
 
-function openMoreInfo() {
+function openMoreInfo(source) {
     const dom = findDomElements()
-    for (let i = 0; i < todos.length; i++) {
+    for (let i = 0; i < source.length; i++) {
         dom.moreImg[i].addEventListener("click", function (e) {
             let index = e.target.dataset.index
             dom.descriptionDiv[index].classList.toggle("active")
@@ -292,4 +299,4 @@ function checkPriority() {
 
 
 
-export { render, removeFromList, findDomInputs, newCardBtnFunctions }
+export { render, removeFromList, findDomInputs, newCardBtnFunctions, renderFiltered, deleteTaskDivs }
