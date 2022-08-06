@@ -1,10 +1,6 @@
 import { addToList, pushOutTask, todos, filteredTodos } from "./todos.js"
 import { format } from 'date-fns'
-import { daysToWeeks } from "date-fns/esm"
-
-const result = format(new Date(2022, 3, 13), 'dd/MM/yyyy')
-console.log(result)
-
+import { storageItems, getItemsFromStorage } from "./index.js"
 
 const main = document.querySelector(".main")
 
@@ -211,6 +207,7 @@ function removeFromList(source) {
             pushOutTask(index)
             deleteTaskDivs()
             render()
+            storageItems()
         })
     }
 }
@@ -278,12 +275,13 @@ function addTask() {
         if (values.date === "" || values.title === "") {
             alert("Title and date required")
         }
-        if (values.date != "" && values.title != "") {
+        if (values.date !== "" && values.title !== "") {
             addToList(values.title, values.describtion, new Date(values.date), checkPriority(), values.notes, values.project, values.completed)
             deleteTaskDivs()
             render()
             wholeDom.newCard.classList.remove("open")
             clearInputs()
+            storageItems()
         }
     })
 }
