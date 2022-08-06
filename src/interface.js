@@ -275,11 +275,30 @@ function addTask() {
     const wholeDom = findDomElements()
     dom.doneBtn.addEventListener("click", function () {
         const values = getInputValues()
-        addToList(values.title, values.describtion, new Date(values.date), checkPriority(), values.notes, values.project, values.completed)
-        deleteTaskDivs()
-        render()
-        wholeDom.newCard.classList.remove("open")
+        if (values.date === "" || values.title === "") {
+            alert("Title and date required")
+        }
+        if (values.date != "" && values.title != "") {
+            addToList(values.title, values.describtion, new Date(values.date), checkPriority(), values.notes, values.project, values.completed)
+            deleteTaskDivs()
+            render()
+            wholeDom.newCard.classList.remove("open")
+            clearInputs()
+        }
     })
+}
+
+function clearInputs() {
+    const dom = findDomInputs()
+    dom.title.value = ""
+    dom.describtion.value = ""
+    dom.notes.value = ""
+    dom.date.value = ""
+    dom.project.value = ""
+    dom.completed.checked = false
+    dom.priorHigh.checked = false
+    dom.priorMed.checked = false
+    dom.priorLow.checked = false
 }
 
 function checkPriority() {
@@ -299,4 +318,4 @@ function checkPriority() {
 
 
 
-export { render, removeFromList, findDomInputs, newCardBtnFunctions, renderFiltered, deleteTaskDivs }
+export { render, removeFromList, findDomInputs, newCardBtnFunctions, renderFiltered, deleteTaskDivs, getInputValues }

@@ -1,4 +1,4 @@
-import { findDomInputs } from './interface.js'
+import { getInputValues } from './interface.js'
 import { getWeek } from 'date-fns'
 
 const todos = []

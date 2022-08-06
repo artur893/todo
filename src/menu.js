@@ -1,4 +1,4 @@
-import { selectTodayTasks, selectThisWeekTasks, filteredTodos } from './todos.js'
+import { selectTodayTasks, selectThisWeekTasks, filteredTodos, todos } from './todos.js'
 import { render, renderFiltered, deleteTaskDivs } from './interface.js'
 
 function findMenuElements() {
@@ -33,10 +33,33 @@ function thisWeekTasks() {
         renderFiltered()
     })
 }
+
+function projectsList() {
+    menuDom.projects.addEventListener("click", function () {
+        removeProjectList()
+        for (let i = 0; i < todos.length; i++) {
+            const li = document.createElement("li")
+            li.classList.add("projectname")
+            const ul = document.querySelector(".list")
+            ul.appendChild(li)
+            li.textContent = todos[i].project
+        }
+    })
+}
+
+function removeProjectList() {
+    const projectNames = document.querySelectorAll(".projectname")
+    console.log(projectNames)
+    projectNames.forEach(project => {
+        project.remove()
+    })
+}
+
 function menuFunctions() {
     allTasks()
     todayTasks()
     thisWeekTasks()
+    projectsList()
 }
 
 export { menuFunctions }
